@@ -1,0 +1,19 @@
+Guitar
+
+Properties
+
+type
+
+brand
+
+color
+
+price
+
+Methods (functions)
+
+// Returns string
+describe()
+
+This is [color], [brand], priced at [price]
+This is a red Fender Telecaster priced at $1000.
