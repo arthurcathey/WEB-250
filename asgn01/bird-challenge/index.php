@@ -18,9 +18,19 @@ class Bird
     return "This bird can fly";
   }
 
-  function name()
+  function displayInfo($label)
   {
-    return $this->commonName . "  " . $this->nestPlacement . "  " . $this->conservationLevel;
+    echo "\${$label}<br/>";
+    echo "Properties<br/>";
+    echo "_____________<br/>";
+    echo "commonName = {$this->commonName}<br/>";
+    echo "food = {$this->food}<br/>";
+    echo "nestPlacement = {$this->nestPlacement}<br/>";
+    echo "conservationLevel = {$this->conservationLevel}<br/>";
+    echo "Methods<br/>";
+    echo "_____________<br/>";
+    echo "song = {$this->song()}<br/>";
+    echo "canFly = {$this->canFly()}<br/><br/>";
   }
 }
 
@@ -34,15 +44,9 @@ $bird1->birdSong = "drink-your-tea!";
 $bird2 = new Bird;
 $bird2->commonName = "Indigo Bunting";
 $bird2->food = "small seeds, berries, buds, and insects";
-$bird2->nestPlacement = "Fields, roadsides, and edges of woods";
+$bird2->nestPlacement = "roadsides, and railroad rights-of-way, fields and on the edges of woods";
 $bird2->conservationLevel = "Low";
 $bird2->birdSong = "whatwhat!!";
 
-echo $bird1->name() . "<br/>";
-echo $bird2->name() . "<br/>";
-
-echo "Bird 1 song: " . $bird1->song() . "<br/>";
-echo "Bird 1 can fly? " . $bird1->canFly() . "<br/>";
-
-echo "Bird 2 song: " . $bird2->song() . "<br/>";
-echo "Bird 2 can fly? " . $bird2->canFly() . "<br/>";
+$bird1->displayInfo("bird1");
+$bird2->displayInfo("bird2");
