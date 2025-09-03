@@ -1,76 +1,48 @@
 <?php
+
 class Bird
 {
-  public $commonName;
-  public $food;
-  public $nestPlacement;
-  public $conservationLevel;
-  private $birdSong;
+  var $commonName;
+  var $food;
+  var $nestPlacement;
+  var $conservationLevel;
+  var $birdSong;
 
-  public function __construct($commonName, $food, $nestPlacement, $conservationLevel, $birdSong)
-  {
-    $this->commonName = $commonName;
-    $this->food = $food;
-    $this->nestPlacement = $nestPlacement;
-    $this->conservationLevel = $conservationLevel;
-    $this->birdSong = $birdSong;
-  }
-
-  public function song()
+  function song()
   {
     return $this->birdSong;
   }
 
-  public function canFly()
+  function canFly()
   {
     return "This bird can fly";
   }
 
-  public function displayInfo()
+  function name()
   {
-    echo "Properties\n";
-    echo "<br>";
-    echo "------------\n";
-    echo "<br>";
-    echo "commonName = {$this->commonName}\n";
-    echo "<br>";
-    echo "food = {$this->food}\n";
-    echo "<br>";
-    echo "nestPlacement = {$this->nestPlacement}\n";
-    echo "<br>";
-    echo "conservationLevel = {$this->conservationLevel}\n\n";
-    echo "<br>";
-
-    echo "Methods\n";
-    echo "<br>";
-    echo "------------\n";
-    echo "<br>";
-    echo "song = {$this->song()}\n";
-    echo "<br>";
-    echo "canFly = {$this->canFly()}\n";
-    echo "<br>";
-    echo "\n";
+    return $this->commonName . "  " . $this->nestPlacement . "  " . $this->conservationLevel;
   }
 }
 
-$bird1 = new Bird(
-  "Eastern Towhee",
-  "seeds, fruits, insects, spiders",
-  "Ground",
-  "Low",
-  "drink-your-tea!"
-);
+$bird1 = new Bird;
+$bird1->commonName = "Eastern Towhee";
+$bird1->food = "seeds, fruits, insects, spiders";
+$bird1->nestPlacement = "Ground";
+$bird1->conservationLevel = "Low";
+$bird1->birdSong = "drink-your-tea!";
 
-$bird2 = new Bird(
-  "Indigo Bunting",
-  "small seeds, berries, buds, and insects",
-  "roadsides, and railroad rights-of-wafields and on the edges of woods",
-  "Low",
-  "whatwhat!!"
-);
+$bird2 = new Bird;
+$bird2->commonName = "Indigo Bunting";
+$bird2->food = "small seeds, berries, buds, and insects";
+$bird2->nestPlacement = "Fields, roadsides, and edges of woods";
+$bird2->conservationLevel = "Low";
+$bird2->birdSong = "whatwhat!!";
 
-echo "\$bird1\n\n";
-$bird1->displayInfo();
+echo $bird1->name() . "<br/>";
+echo $bird2->name() . "<br/>";
 
-echo "\$bird2\n\n";
-$bird2->displayInfo();
+echo "Bird 1 song: " . $bird1->song() . "<br/>";
+echo "Bird 1 can fly? " . $bird1->canFly() . "<br/>";
+
+echo "Bird 2 song: " . $bird2->song() . "<br/>";
+echo "Bird 2 can fly? " . $bird2->canFly() . "<br/>";
