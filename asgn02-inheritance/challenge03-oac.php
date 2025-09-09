@@ -1,58 +1,65 @@
 <?php
-class Guitar
+
+class Bicycle
 {
   public $brand;
-  protected $price = 0;
+  public $model;
+  protected $year;
+  private $weightKg;
 
-  public function setPrice($amount)
+  public function name()
   {
-    $this->price = $amount;
+    return "{$this->brand} {$this->model} ({$this->year})";
   }
 
-  public function getPrice()
+  public function setWeightKg($value)
   {
-    return $this->price;
+    $this->weightKg = $value;
+  }
+
+  public function getWeightKg()
+  {
+    return $this->weightKg . " kg";
+  }
+
+  public function weightLbs()
+  {
+    return ($this->weightKg * 2.20462) . " lbs";
   }
 }
 
-class ElectricGuitar extends Guitar
+class Unicycle extends Bicycle
 {
-  public function applyDiscount($percent)
+  public $wheels = 1;
+
+  public function wheelDetails()
   {
-    $discountAmount = ($percent / 100) * $this->price;
-    $this->price -= $discountAmount;
+    return "It has {$this->wheels} wheel.";
   }
 }
 
-class AcousticGuitar extends Guitar
+class RoadBike extends Bicycle
 {
-  public $bodyType;
+  public $wheels = 2;
 
-  public function setBodyType($type)
+  public function wheelDetails()
   {
-    $this->bodyType = $type;
-  }
-
-  public function describe()
-  {
-    return $this->brand . " acoustic guitar has a " . $this->bodyType . " body.";
+    return "It has {$this->wheels} wheels.";
   }
 }
 
-$electric = new ElectricGuitar();
-$electric->brand = "Gibson";
-$electric->setPrice(1200);
-$electric->applyDiscount(10);
-echo $electric->brand . " electric guitar now costs $" . $electric->getPrice() . "<br>";
+$bike = new RoadBike();
+$bike->brand = "Trek";
+$bike->model = "Domane";
+$bike->setWeightKg(8);
+echo $bike->name() . "<br>";
+echo "Weight: " . $bike->getWeightKg() . " / " . $bike->weightLbs() . "<br>";
+echo $bike->wheelDetails() . "<br><br>";
 
-$acoustic = new AcousticGuitar();
-$acoustic->brand = "Taylor";
-$acoustic->setPrice(900);
-$acoustic->setBodyType("dreadnought");
-echo $acoustic->brand . " acoustic guitar costs $" . $acoustic->getPrice() . "<br>";
-echo $acoustic->describe() . "<br>";
-
-$guitar = new Guitar();
-$guitar->brand = "Fender";
-$guitar->setPrice(800);
-echo $guitar->brand . " guitar costs $" . $guitar->getPrice();
+$uni = new Unicycle();
+$uni->brand = "Schwinn";
+$uni->model = "OneWheel";
+$uni->setWeightKg(5);
+echo $uni->name() . "<br>";
+echo "Weight: " . $uni->getWeightKg() . " / " . $uni->weightLbs() . "<br>";
+echo $uni->wheelDetails() . "<br>";
