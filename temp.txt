@@ -1,0 +1,24 @@
+*   3d56c2b (HEAD -> main, origin/main, origin/HEAD) Merge asgn03-static (renamed to asgn03-static-challenge) into main
+|\  
+| * a9db7fe (asgn03-static) Rename project folder: asgn03-static → asgn03-static-challenge (use assignment folder name)
+| * 1e726a4 (origin/asgn03-static) Removed incorrect folder asgn03-static-challenge
+| * 7d43cb5 WIP: save before renaming folders
+|/  
+* 2f4206e Starting asgn03-static
+* 00935fa Remove old empty file and track correct files
+* 80de392 Starting asgn02-inheritance
+* 2e2743f (origin/asgn02-access-control, asgn02-access-control) Renamed challenge-02-inheritance to .php and updated Dog + OAC challenge code
+| * 2b923a4 (asgn02-inheritance) Restore code in challenge-02-inheritance.php
+| * 08cd859 Track challenge-02-inheritance.php file (restored after .php left off)
+|/  
+* f309289 (origin/asgn02-inheritance) Completed inheritance challenge
+*   fd7d317 Starting asgn02-inheritancegit status
+|\  
+| * 0cee26e Finished code for dev branch time to merge back to main.
+* | b55a26d Added a line.
+|/  
+* 10b2eaf Finished the Bike and Bird classes.
+* dd762e7 commiting bike challenge
+* 07bb063 completed bike challenge
+* ce75821 Initial commit
+* 416d9fe Initial commit
