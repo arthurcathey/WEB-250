@@ -2,8 +2,13 @@
 
 function my_autoload($class)
 {
-  if (preg_match('/\A\w+\Z/', $class)) {
-    include 'classes/' . $class . '.class.php';
+  $class = ucfirst($class);
+
+  $file = __DIR__ . '/classes/' . ($class) . '.class.php';
+  if (file_exists($file)) {
+    include $file;
+  } else {
+    echo "Autoload error: Class file '$file' not found.<br>";
   }
 }
 
