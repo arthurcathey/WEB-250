@@ -1,0 +1,6 @@
+brand,model,year,category,gender,color,weight_kg,condition_id,price,description
+Trek,Domane,2020,Road,Mens,Red,8.5,4,1999.99,Endurance road bike
+Giant,Defy,2019,Road,Unisex,Blue,9.1,3,1599.99,Comfort road bike
+Specialized,Rockhopper,2021,Mountain,Womens,Green,12.3,5,899.99,Trail mountain bike
+Cannondale,Quick,2022,Hybrid,Mens,Black,10.5,2,699.99,City/commuter bike
+Schwinn,Breeze,2020,Cruiser,Unisex,White,14.0,1,399.99,Beach cruiser bike
