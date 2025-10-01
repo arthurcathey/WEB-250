@@ -29,7 +29,6 @@ function my_autoload($class)
     }
   }
 
-  // Default autoload for other classes
   if (preg_match('/\A\w+\Z/', $class)) {
     $file = PRIVATE_PATH . '/classes/' . $class . '.class.php';
     if (file_exists($file)) {
