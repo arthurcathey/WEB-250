@@ -6,13 +6,13 @@
 <div id="main">
   <div id="page">
     <div class="intro">
-      <img class="inset" src="<?php echo url_for('public/images/bicycle.php/AdobeStock_18040381_xlarge.jpeg'); ?>" />
+      <img class="inset" src="<?php echo url_for('public/images/AdobeStock_18040381_xlarge.jpeg'); ?>" />
       <h2>Our Inventory of Used Bicycles</h2>
       <p>Choose the bike you love.</p>
       <p>We will deliver it to your door and let you try it before you buy it.</p>
     </div>
 
-    <table id="inventory">
+    <table id="inventory" border="1" cellpadding="5" cellspacing="0">
       <tr>
         <th>Brand</th>
         <th>Model</th>
@@ -27,28 +27,32 @@
 
       <?php
       $csv_file = PRIVATE_PATH . '/used_bicycles.csv';
+      $bike_array = [];
+
       if (!file_exists($csv_file)) {
         echo "<tr><td colspan='9'>CSV file not found: {$csv_file}</td></tr>";
       } else {
-        $parser = new ParseCSV($csv_file);
-        $bike_array = $parser->parse();
-        if ($bike_array === false) {
-          echo "<tr><td colspan='9'>Error parsing CSV file.</td></tr>";
-        } else {
-          foreach ($bike_array as $args) {
-            $bike = new Bicycle($args);
-            echo "<tr>";
-            echo "<td>" . h($bike->brand) . "</td>";
-            echo "<td>" . h($bike->model) . "</td>";
-            echo "<td>" . h($bike->year) . "</td>";
-            echo "<td>" . h($bike->category) . "</td>";
-            echo "<td>" . h($bike->gender) . "</td>";
-            echo "<td>" . h($bike->color) . "</td>";
-            echo "<td>" . h($bike->weight_kg()) . " / " . h($bike->weight_lbs()) . "</td>";
-            echo "<td>" . h($bike->condition()) . "</td>";
-            echo "<td>$" . number_format($bike->price, 2) . "</td>";
-            echo "</tr>";
+        if (($handle = fopen($csv_file, 'r')) !== false) {
+          $headers = fgetcsv($handle);
+          while (($row = fgetcsv($handle)) !== false) {
+            $bike_array[] = array_combine($headers, $row);
           }
+          fclose($handle);
+        }
+
+        foreach ($bike_array as $args) {
+          $bike = new Bicycle($args);
+          echo "<tr>";
+          echo "<td>" . h($bike->brand) . "</td>";
+          echo "<td>" . h($bike->model) . "</td>";
+          echo "<td>" . h($bike->year) . "</td>";
+          echo "<td>" . h($bike->category) . "</td>";
+          echo "<td>" . h($bike->gender) . "</td>";
+          echo "<td>" . h($bike->color) . "</td>";
+          echo "<td>" . h($bike->weight_kg()) . " / " . h($bike->weight_lbs()) . "</td>";
+          echo "<td>" . h($bike->condition()) . "</td>";
+          echo "<td>$" . number_format($bike->price, 2) . "</td>";
+          echo "</tr>";
         }
       }
       ?>

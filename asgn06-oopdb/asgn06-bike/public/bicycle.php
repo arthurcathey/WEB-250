@@ -1,5 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once('../private/initialize.php');
+?>
+<?php
+
 
 $page_title = 'Inventory';
 include(SHARED_PATH . '/public_header.php');
