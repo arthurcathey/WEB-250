@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "log": true,
+      "pathMappings": {
+        "C:/Program Files/Ampps/www/WEB-250": "${workspaceFolder}"
+      },
+      "ignore": [
+        "**/vendor/**/*.php"
+      ],
+      "runtimeExecutable": "C:/Program Files/Ampps/php82/php.exe"
+    }
+  ]
+}

@@ -43,7 +43,7 @@ include(SHARED_PATH . '/public_header.php');
           echo "<td>" . h($bird->backyard_tips) . "</td>";
           echo "<td>";
           if (!empty($bird->id)) {
-            echo '<a href="show.php?id=' . h(u($bird->id)) . '">View</a>';
+            echo '<a href="staff/birds/show.php?id=' . h(u($bird->id)) . '">View</a>';
           } else {
             echo 'No details';
           }

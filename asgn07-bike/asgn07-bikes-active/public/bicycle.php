@@ -44,7 +44,7 @@ include(SHARED_PATH . '/public_header.php');
           echo "<td>$" . number_format($bike->price, 2) . "</td>";
           echo "<td>";
           if (!empty($bike->id)) {
-            echo '<a href="detail.php?id=' . h(u($bike->id)) . '">View</a>';
+            echo '<a href="staff/bicycles/show.php?id=' . h(u($bike->id)) . '">View</a>';
           } else {
             echo 'No details';
           }

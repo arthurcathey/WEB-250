@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 
 class Bird extends DatabaseObject
 {
+
   static protected $table_name = 'birds';
   static protected $db_columns = [
     'id',
@@ -17,7 +18,7 @@ class Bird extends DatabaseObject
     'backyard_tips'
   ];
 
-  // Explicitly declare all properties
+  // Properties
   public $id;
   public $common_name;
   public $habitat;
@@ -26,8 +27,9 @@ class Bird extends DatabaseObject
   public $behavior;
   public $conservation_id;
   public $backyard_tips;
-  public $errors = []; // prevent dynamic property warnings
+  public $errors = [];
 
+  // Conservation status options
   public const CONSERVATION_OPTIONS = [
     1 => 'Low concern',
     2 => 'Moderate concern',
@@ -46,19 +48,25 @@ class Bird extends DatabaseObject
     $this->backyard_tips   = $args['backyard_tips'] ?? '';
   }
 
-  // Return a friendly "name" for the bird
+  // ✅ Relationship: fetch all related images
+  public function images()
+  {
+    return Image::find_by_bird_id($this->id);
+  }
+
+  // ✅ Human-readable name
   public function name()
   {
     return $this->common_name;
   }
 
-  // Return human-readable conservation status
+  // ✅ Human-readable conservation label
   public function conservation()
   {
     return self::CONSERVATION_OPTIONS[$this->conservation_id] ?? 'Unknown';
   }
 
-  // Validate bird attributes
+  // ✅ Validation
   protected function validate()
   {
     $this->errors = [];

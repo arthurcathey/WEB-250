@@ -1,0 +1,92 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once('../private/initialize.php');
+
+$id = $_GET['id'] ?? null;
+if (!$id || !is_numeric($id)) {
+  redirect_to(url_for('/birds.php'));
+}
+
+$bird = Bird::find_by_id($id);
+if (!$bird) {
+  redirect_to(url_for('/birds.php'));
+}
+
+if (is_post_request()) {
+
+  // 1️⃣ Merge posted attributes
+  $args = $_POST['bird'];
+  $bird->merge_attributes($args);
+  $result = $bird->save();
+
+  if ($result === true) {
+
+    // 2️⃣ Handle deleting images
+    if (!empty($_POST['delete_images'])) {
+      foreach ($_POST['delete_images'] as $image_id) {
+        $image = Image::find_by_id($image_id);
+        if ($image) {
+          $file_path = PUBLIC_PATH . '/uploads/' . $image->file_name;
+          if (file_exists($file_path)) {
+            unlink($file_path); // delete file
+          }
+          $image->delete(); // delete DB record
+        }
+      }
+    }
+
+    // 3️⃣ Handle file upload
+    if (isset($_FILES['bird_image']) && $_FILES['bird_image']['error'] === UPLOAD_ERR_OK) {
+      $upload_dir = PUBLIC_PATH . '/uploads/';
+      if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+      }
+
+      $tmp_name = $_FILES['bird_image']['tmp_name'];
+      $filename = basename($_FILES['bird_image']['name']);
+      $target_path = $upload_dir . $filename;
+
+      if (move_uploaded_file($tmp_name, $target_path)) {
+        $image = new Image([
+          'bird_id_fk' => $bird->id,
+          'file_name'  => $filename
+        ]);
+        $image->save();
+      }
+    }
+
+    // 4️⃣ Success message and redirect
+    $_SESSION['message'] = 'The bird was updated successfully.';
+    redirect_to(url_for('/show.php?id=' . $bird->id));
+  }
+  // else: errors will be displayed below
+}
+?>
+
+<?php $page_title = 'Edit Bird'; ?>
+<?php include(SHARED_PATH . '/public_header.php'); ?>
+
+<div id="content">
+
+  <a class="back-link" href="<?php echo url_for('/birds.php'); ?>">&laquo; Back to List</a>
+
+  <div class="bird edit">
+    <h1>Edit Bird</h1>
+
+    <?php echo display_errors($bird->errors); ?>
+
+    <form action="<?php echo url_for('/edit.php?id=' . h(u($bird->id))); ?>" method="post" enctype="multipart/form-data">
+      <?php include('form_fields.php'); ?>
+      <div id="operations">
+        <input type="submit" value="Edit Bird" />
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<?php include(SHARED_PATH . '/public_footer.php'); ?>
