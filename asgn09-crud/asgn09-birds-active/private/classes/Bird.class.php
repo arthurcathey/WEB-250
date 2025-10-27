@@ -48,25 +48,21 @@ class Bird extends DatabaseObject
     $this->backyard_tips   = $args['backyard_tips'] ?? '';
   }
 
-  // ✅ Relationship: fetch all related images
   public function images()
   {
     return Image::find_by_bird_id($this->id);
   }
 
-  // ✅ Human-readable name
   public function name()
   {
     return $this->common_name;
   }
 
-  // ✅ Human-readable conservation label
   public function conservation()
   {
     return self::CONSERVATION_OPTIONS[$this->conservation_id] ?? 'Unknown';
   }
 
-  // ✅ Validation
   protected function validate()
   {
     $this->errors = [];
@@ -79,6 +75,13 @@ class Bird extends DatabaseObject
     }
     if (is_blank($this->food)) {
       $this->errors[] = "Food cannot be blank.";
+    }
+
+    if (is_blank($this->nest_placement)) {
+      $this->errors[] = "Nest placement cannot be blank.";
+    }
+    if (is_blank($this->conservation_id)) {
+      $this->errors[] = "Conservation status must be selected.";
     }
 
     return $this->errors;
