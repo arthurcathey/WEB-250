@@ -12,7 +12,6 @@ class Bird extends DatabaseObject
     'common_name',
     'habitat',
     'food',
-    'nest_placement',
     'behavior',
     'conservation_id',
     'backyard_tips'
@@ -23,7 +22,6 @@ class Bird extends DatabaseObject
   public $common_name;
   public $habitat;
   public $food;
-  public $nest_placement;
   public $behavior;
   public $conservation_id;
   public $backyard_tips;
@@ -42,7 +40,6 @@ class Bird extends DatabaseObject
     $this->common_name     = $args['common_name'] ?? '';
     $this->habitat         = $args['habitat'] ?? '';
     $this->food            = $args['food'] ?? '';
-    $this->nest_placement  = $args['nest_placement'] ?? '';
     $this->behavior        = $args['behavior'] ?? '';
     $this->conservation_id = $args['conservation_id'] ?? 1;
     $this->backyard_tips   = $args['backyard_tips'] ?? '';
@@ -75,10 +72,6 @@ class Bird extends DatabaseObject
     }
     if (is_blank($this->food)) {
       $this->errors[] = "Food cannot be blank.";
-    }
-
-    if (is_blank($this->nest_placement)) {
-      $this->errors[] = "Nest placement cannot be blank.";
     }
     if (is_blank($this->conservation_id)) {
       $this->errors[] = "Conservation status must be selected.";

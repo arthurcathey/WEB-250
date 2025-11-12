@@ -2,12 +2,19 @@
 
 require_once('../../private/initialize.php');
 
-require_login();
+require_admin_login();
 
 if (is_post_request()) {
 
   // Create record using post parameters
   $args = $_POST['member'] ?? [];
+
+  // Sanitize member_type: allow only 'g', 'm', 'a'
+  $allowed_types = ['g', 'm', 'a'];
+  if (!isset($args['member_type']) || !in_array($args['member_type'], $allowed_types)) {
+    $args['member_type'] = 'm'; // default to 'member' if invalid or missing
+  }
+
   $member = new Member($args);
   $result = $member->save();
 
@@ -16,11 +23,12 @@ if (is_post_request()) {
     $session->message('The member was created successfully.');
 
     redirect_to(url_for('/members/show.php?id=' . $new_id));
+    exit;
   } else {
-    // show errors
+    // Validation errors will be displayed below
   }
 } else {
-  // display the form
+  // Display the form for GET requests
   $member = new Member;
 }
 
@@ -41,6 +49,18 @@ if (is_post_request()) {
     <form action="<?php echo url_for('/members/new.php'); ?>" method="post">
 
       <?php include('form_fields.php'); ?>
+
+      <!-- Member Type select -->
+      <dl>
+        <dt><label for="member_type">Member Type</label></dt>
+        <dd>
+          <select name="member[member_type]" id="member_type" required>
+            <option value="g" <?php echo $member->member_type === 'g' ? 'selected' : ''; ?>>Generic</option>
+            <option value="m" <?php echo $member->member_type === 'm' ? 'selected' : ''; ?>>Member</option>
+            <option value="a" <?php echo $member->member_type === 'a' ? 'selected' : ''; ?>>Admin</option>
+          </select>
+        </dd>
+      </dl>
 
       <div id="operations">
         <input type="submit" value="Create Member" />

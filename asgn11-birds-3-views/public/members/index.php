@@ -3,7 +3,6 @@
 <?php require_login(); ?>
 
 <?php
-// Find all members
 $members = Member::find_all();
 ?>
 
@@ -14,9 +13,12 @@ $members = Member::find_all();
   <div class="members listing">
     <h1>Members</h1>
 
-    <div class="actions">
-      <a class="action" href="<?php echo url_for('/members/new.php'); ?>">Add Member</a>
-    </div>
+    <?php if ($session->is_logged_in() && $session->get_member_type() === 'a') { ?>
+      <div class="actions">
+        <a class="action" href="<?php echo url_for('/members/new.php'); ?>">Add Member</a>
+      </div>
+    <?php } ?>
+
 
     <table class="list">
       <tr>
@@ -25,6 +27,7 @@ $members = Member::find_all();
         <th>Last Name</th>
         <th>Email</th>
         <th>Username</th>
+        <th>Role</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
@@ -37,6 +40,7 @@ $members = Member::find_all();
           <td><?php echo h($member->last_name); ?></td>
           <td><?php echo h($member->email); ?></td>
           <td><?php echo h($member->username); ?></td>
+          <td><?php echo h($member->role_name()); ?></td>
           <td><a class="action" href="<?php echo url_for('/members/show.php?id=' . h(u($member->id))); ?>">View</a></td>
           <td><a class="action" href="<?php echo url_for('/members/edit.php?id=' . h(u($member->id))); ?>">Edit</a></td>
           <td><a class="action" href="<?php echo url_for('/members/delete.php?id=' . h(u($member->id))); ?>">Delete</a></td>

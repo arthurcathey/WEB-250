@@ -3,8 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once('../private/initialize.php');
 
-require_login();
-
 $page_title = 'Bird Inventory';
 include(SHARED_PATH . '/public_header.php');
 ?>
@@ -25,7 +23,6 @@ include(SHARED_PATH . '/public_header.php');
         <th>Name</th>
         <th>Habitat</th>
         <th>Food</th>
-        <th>Nest Placement</th>
         <th>Behavior</th>
         <th>Conservation</th>
         <th>Backyard Tips</th>
@@ -42,7 +39,6 @@ include(SHARED_PATH . '/public_header.php');
             <td><?php echo h($bird->common_name); ?></td>
             <td><?php echo h($bird->habitat); ?></td>
             <td><?php echo h($bird->food); ?></td>
-            <td><?php echo h($bird->nest_placement); ?></td>
             <td><?php echo h($bird->behavior); ?></td>
             <td><?php echo h($bird->conservation()); ?></td>
             <td><?php echo h($bird->backyard_tips); ?></td>

@@ -5,12 +5,12 @@
 // 2. Unique credentials on development and production servers
 // 3. Unique credentials if working with multiple developers
 
-define("DB_SERVER", "localhost");
-define("DB_USER", "webuser");
-define("DB_PASS", "Chopper1984$");
-define("DB_NAME", "bird");
-
 // define("DB_SERVER", "localhost");
-// define("DB_USER", "hqkmwgmy_webuser");
+// define("DB_USER", "webuser");
 // define("DB_PASS", "Chopper1984$");
-// define("DB_NAME", "hqkmwgmy_birds");
+// define("DB_NAME", "bird");
+
+define("DB_SERVER", "localhost");
+define("DB_USER", "hqkmwgmy_webuser");
+define("DB_PASS", "Chopper1984$");
+define("DB_NAME", "hqkmwgmy_birds");

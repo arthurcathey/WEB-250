@@ -6,9 +6,6 @@ error_reporting(E_ALL);
 
 require_once('../private/initialize.php');
 
-require_login();
-
-
 // --- Get bird ID ---
 $id = $_GET['id'] ?? false;
 if (!$id) {
@@ -44,11 +41,6 @@ include(SHARED_PATH . '/public_header.php');
     <dl>
       <dt>Food</dt>
       <dd><?php echo h($bird->food); ?></dd>
-    </dl>
-
-    <dl>
-      <dt>Nest Placement</dt>
-      <dd><?php echo h($bird->nest_placement); ?></dd>
     </dl>
 
     <dl>

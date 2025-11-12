@@ -6,16 +6,11 @@ error_reporting(E_ALL);
 
 require_once('../private/initialize.php');
 
-require_login();
-
-
-// --- Get bird ID ---
 $id = $_GET['id'] ?? false;
 if (!$id) {
   redirect_to(url_for('/birds.php'));
 }
 
-// --- Find the bird record ---
 $bird = Bird::find_by_id($id);
 if (!$bird) {
   redirect_to(url_for('/birds.php'));
@@ -44,11 +39,6 @@ include(SHARED_PATH . '/public_header.php');
     <dl>
       <dt>Food</dt>
       <dd><?php echo h($bird->food); ?></dd>
-    </dl>
-
-    <dl>
-      <dt>Nest Placement</dt>
-      <dd><?php echo h($bird->nest_placement); ?></dd>
     </dl>
 
     <dl>

@@ -53,10 +53,12 @@ class DatabaseObject
     foreach ($record as $property => $value) {
       if (property_exists($object, $property)) {
         $object->$property = $value;
+        error_log("Setting property {$property} to " . $value);
       }
     }
     return $object;
   }
+
 
   protected function validate()
   {

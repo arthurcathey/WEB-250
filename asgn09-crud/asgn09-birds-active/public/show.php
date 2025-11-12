@@ -45,11 +45,6 @@ include(SHARED_PATH . '/public_header.php');
     </dl>
 
     <dl>
-      <dt>Nest Placement</dt>
-      <dd><?php echo h($bird->nest_placement); ?></dd>
-    </dl>
-
-    <dl>
       <dt>Behavior</dt>
       <dd><?php echo h($bird->behavior); ?></dd>
     </dl>

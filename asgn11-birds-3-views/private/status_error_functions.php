@@ -5,8 +5,30 @@ function require_login()
   global $session;
   if (!$session->is_logged_in()) {
     redirect_to(url_for('/login.php'));
-  } else {
-    // do nothing, admin is logged in
+  }
+}
+
+function require_member_login()
+{
+  global $session;
+  if (!$session->is_logged_in() || $session->get_member_type() !== 'a') {
+    redirect_to(url_for('/login.php'));
+  }
+}
+
+function require_admin_login()
+{
+  global $session;
+  if (!$session->is_logged_in() || $session->get_member_type() !== 'a') {
+    redirect_to(url_for('/login.php'));
+  }
+}
+
+function require_generic_user()
+{
+  global $session;
+  if ($session->is_logged_in()) {
+    redirect_to(url_for('/birds/index.php'));
   }
 }
 
@@ -38,7 +60,6 @@ function get_and_clear_session_message()
 function display_session_message()
 {
   global $session;
-  $msg = $session->message();
   $msg = get_and_clear_session_message();
   if (isset($msg) && $msg != '') {
     $session->clear_message();
